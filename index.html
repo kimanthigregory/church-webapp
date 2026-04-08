@@ -1,0 +1,562 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>St. Mary's Catholic Church Kiserian</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#e2e2e2",
+              "surface-tint": "#075fab",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#e3e2e2",
+              background: "#f9f9f9",
+              "on-primary-fixed-variant": "#004884",
+              "secondary-container": "#e0dfdf",
+              "surface-container-low": "#f3f3f3",
+              "on-surface-variant": "#3f484c",
+              outline: "#6f787d",
+              primary: "#075fab",
+              "primary-fixed": "#d4e3ff",
+              "secondary-fixed-dim": "#c7c6c6",
+              "tertiary-fixed-dim": "#e9c176",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#626363",
+              "surface-container-lowest": "#ffffff",
+              tertiary: "#775a19",
+              "tertiary-fixed": "#ffdea5",
+              "tertiary-container": "#e6bf75",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed": "#1a1c1c",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#a4c9ff",
+              "surface-container-highest": "#e2e2e2",
+              "on-tertiary-fixed-variant": "#5d4201",
+              "on-tertiary-fixed": "#261900",
+              "on-tertiary-container": "#694c0b",
+              error: "#ba1a1a",
+              "primary-container": "#a0c6ff",
+              "on-primary-fixed": "#001c39",
+              "on-background": "#1a1c1c",
+              surface: "#f9f9f9",
+              "surface-container-high": "#e8e8e8",
+              "on-surface": "#1a1c1c",
+              "inverse-on-surface": "#f1f1f1",
+              secondary: "#5e5e5f",
+              "on-primary-container": "#005296",
+              "outline-variant": "#bfc8cd",
+              "on-error": "#ffffff",
+              "surface-dim": "#dadada",
+              "on-secondary-fixed-variant": "#464747",
+              "inverse-primary": "#a4c9ff",
+              "surface-container": "#eeeeee",
+              "inverse-surface": "#2f3131",
+              "surface-bright": "#f9f9f9",
+              "on-tertiary": "#ffffff",
+            },
+            fontFamily: {
+              headline: ["Noto Serif"],
+              body: ["Manrope"],
+              label: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .glass-reflection {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(40px);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #075fab 0%, #a0c6ff 100%);
+      }
+      .bg-pattern-cross {
+        background-image: url("data:image/svg+xml,%3Csvg width='80' height='130' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v60M15 30h30' stroke='%23075fab' stroke-width='1.5' fill='none' stroke-opacity='0.15'/%3E%3C/svg%3E");
+        background-size: 80px 130px;
+      }
+      .bg-pattern-arch {
+        background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 110 Q 10 20 60 20 Q 110 20 110 110' stroke='%23775a19' stroke-width='1' fill='none' stroke-opacity='0.12'/%3E%3C/svg%3E");
+        background-size: 240px 240px;
+      }
+      .bg-pattern-stained-glass {
+        background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 L40 0 L80 40 L40 80 Z M40 0 L40 80 M0 40 L80 40' stroke='%23000' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3C/svg%3E");
+        background-size: 120px 120px;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface font-body text-on-surface antialiased bg-pattern-stained-glass"
+  >
+    <nav
+      class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none transition-all duration-300 ease-in-out"
+    >
+      <div
+        class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4"
+      >
+        <div
+          class="font-noto-serif text-xl font-bold text-sky-900 dark:text-sky-100"
+        >
+          St. Mary's Kiserian
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a
+            class="font-noto-serif text-sm uppercase tracking-widest text-sky-700 dark:text-sky-400 border-b-2 border-amber-600 pb-1"
+            href="#"
+            >Home</a
+          >
+          <a
+            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            href="#"
+            >About Us</a
+          >
+          <a
+            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            href="#"
+            >Daily Readings</a
+          >
+          <a
+            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            href="#"
+            >Ministries</a
+          >
+          <a
+            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            href="#"
+            >Gallery</a
+          >
+        </div>
+        <button
+          class="bg-tertiary text-on-tertiary px-6 py-2 rounded-sm font-label uppercase text-xs tracking-widest font-bold hover:bg-tertiary-container transition-colors duration-300"
+        >
+          Donate
+        </button>
+      </div>
+    </nav>
+    <main>
+      <section
+        class="relative min-h-screen flex items-center pt-20 overflow-hidden"
+      >
+        <div class="absolute inset-0 z-0">
+          <img
+            class="w-full h-full object-cover"
+            data-alt="Peaceful interior of a historic stone church altar area"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQCj5UhXdBrOb4vATX9w448IZ_H1dq9xOE-EpbR0nalflolNKVOqgUT8r3nmbaUDoDMLbWU1xpEOaBD6zRlgaBjvMBR99NX-1NbjZz_7wI0CmZiA6-98ZPSfZ7_GWKlT9rJeQZQ3htC5cJfl5kX9X-x20gVON-fnt1fcZgmIXR8eCJhPG6Wm2hQfCIriQXaBd70lzOkdSm4YEKRAsP-oIyZ3ALB9KaAESiWSZuk007oKhwA3sjD0MbGQYR0h0D4ErO7_HirtiPHjs"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"
+          ></div>
+          <div
+            class="absolute inset-0 opacity-40 pointer-events-none bg-pattern-arch mix-blend-multiply"
+          ></div>
+        </div>
+        <div
+          class="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12"
+        >
+          <div class="lg:col-span-7">
+            <span
+              class="inline-block mb-6 font-label text-tertiary uppercase tracking-[0.2em] text-sm font-bold"
+              >A Digital Sanctuary</span
+            >
+            <h1
+              class="font-headline text-6xl md:text-7xl lg:text-8xl text-primary font-extrabold leading-[1.1] mb-8 -tracking-[0.02em]"
+            >
+              Welcome to Our <br />Parish Family
+            </h1>
+            <p
+              class="font-body text-xl text-secondary max-w-xl mb-12 leading-relaxed"
+            >
+              Join us in prayer, fellowship, and service as we grow together in
+              faith within the sacred heart of Kiserian.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6">
+              <button
+                class="bg-tertiary text-on-tertiary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold hero-gradient border-none shadow-lg"
+              >
+                Mass Times
+              </button>
+              <button
+                class="bg-transparent text-primary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold border border-outline-variant/20 hover:bg-surface-container transition-colors"
+              >
+                Explore Ministries
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-24 bg-surface-container-low relative overflow-hidden">
+        <div
+          class="absolute inset-0 bg-pattern-cross pointer-events-none opacity-60"
+        ></div>
+        <div class="max-w-7xl mx-auto px-8 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <h2 class="font-headline text-4xl text-on-surface mb-4 font-bold">
+                Liturgical Schedule
+              </h2>
+              <div class="h-1 w-20 bg-tertiary mb-12"></div>
+              <div class="space-y-8">
+                <div class="flex gap-6 items-start">
+                  <div
+                    class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border-l-4 border-primary"
+                  >
+                    <span
+                      class="material-symbols-outlined text-primary text-3xl"
+                      >church</span
+                    >
+                  </div>
+                  <div>
+                    <h3 class="font-headline text-xl font-bold mb-2">
+                      Mass Times
+                    </h3>
+                    <div class="space-y-2 text-secondary">
+                      <p class="flex justify-between w-64">
+                        <span>Monday - Friday:</span>
+                        <span class="font-semibold">6:30 AM</span>
+                      </p>
+                      <p class="flex justify-between w-64">
+                        <span>Saturday:</span>
+                        <span class="font-semibold">5:00 PM (Vigil)</span>
+                      </p>
+                      <p class="flex justify-between w-64">
+                        <span>Sunday:</span>
+                        <span class="font-semibold">8:00 AM, 10:30 AM</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                  <div
+                    class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border-l-4 border-tertiary"
+                  >
+                    <span
+                      class="material-symbols-outlined text-tertiary text-3xl"
+                      >favorite</span
+                    >
+                  </div>
+                  <div>
+                    <h3 class="font-headline text-xl font-bold mb-2">
+                      Sacrament of Confession
+                    </h3>
+                    <div class="space-y-2 text-secondary">
+                      <p class="flex justify-between w-64">
+                        <span>Saturday:</span>
+                        <span class="font-semibold">4:00 PM - 4:45 PM</span>
+                      </p>
+                      <p class="flex justify-between w-64">
+                        <span>First Fridays:</span>
+                        <span class="font-semibold">After Morning Mass</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="relative pt-12">
+              <div
+                class="absolute -top-6 -left-6 w-32 h-32 bg-tertiary/20 rounded-full z-0"
+              ></div>
+              <div
+                class="relative z-10 glass-reflection p-12 rounded-xl shadow-xl border border-outline-variant/10"
+              >
+                <span class="material-symbols-outlined text-tertiary mb-4"
+                  >format_quote</span
+                >
+                <blockquote
+                  class="font-headline text-2xl italic text-on-surface leading-relaxed mb-6"
+                >
+                  "The Eucharist is the source and summit of the Christian
+                  life."
+                </blockquote>
+                <cite
+                  class="font-body text-sm uppercase tracking-widest text-secondary font-bold not-italic"
+                  >— St. John Paul II</cite
+                >
+              </div>
+              <div
+                class="mt-12 bg-surface-container-lowest p-1 shadow-sm rounded-lg overflow-hidden"
+              >
+                <img
+                  class="w-full h-48 object-cover rounded-md"
+                  data-alt="Close up of lit prayer candles in a dark cathedral"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwqynHO_DMKlSiUViY80Ggrh9hwQSmEzw12JaMyIbIUcPMZn3--s_9TYw0mLitdBdgIpjPSYgu5paQRsNG4Vz25qOGhcwKmxSQOBHdh_A3lNs1SrdiZLFsB5valTUIaSyAhbaMi8518B_UsuhSzQGmUBhnH5PWcQwD9uZY2ISHqpvX7z2zxDRXG40cUMvQQl4EAbIHCmdxOcoast0zBYlI0_XKCChHIgfx0KMc2grdMhk5VAJRFB_w-y7qZ5sWQmdSdNYueeD83wCU"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="py-32 bg-surface relative overflow-hidden">
+        <div
+          class="absolute inset-0 bg-pattern-stained-glass pointer-events-none opacity-70"
+        ></div>
+        <div class="max-w-7xl mx-auto px-8 relative z-10">
+          <div
+            class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8"
+          >
+            <div class="max-w-2xl">
+              <span
+                class="font-label text-primary uppercase tracking-[0.2em] text-sm font-bold mb-4 block"
+                >Parish Life</span
+              >
+              <h2
+                class="font-headline text-5xl font-extrabold text-on-surface leading-tight -tracking-tight"
+              >
+                Recent News &amp; Spiritual Reflections
+              </h2>
+            </div>
+            <button
+              class="text-primary font-label uppercase tracking-widest text-sm font-bold flex items-center gap-2 group"
+            >
+              View All News
+              <span
+                class="material-symbols-outlined transition-transform group-hover:translate-x-2"
+                >arrow_right_alt</span
+              >
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            <div class="group">
+              <div class="relative mb-8 overflow-hidden rounded-lg">
+                <img
+                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="Children in a parish youth choir rehearsal"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ1wb62x4wndCIufvjmmUuRpTM6WI5RpcCFIlWXrhOy5pBEn8Rq9DTvzuaqXNHmrAlh7KF0DG8vWA2RRHd8QiITxV7Q3IPyerudGcmSTeBooeRA95PbzetL-xnOmCw-ji25RcaGkRTZF-Osxmgd4Uw3TnhguNI6n65B-UTHy92XmTdd_etQ9D1JNGrVqhuulsIMOe4YkeHhELgHA-0vP68eD_hCVQQcZPKKZAznBQ5xz-ZIoKNNTfC7wXkfd7kPIEs-aKrbv_DrYxe"
+                />
+                <div
+                  class="absolute top-4 left-4 bg-primary text-on-primary px-4 py-1 text-xs font-bold uppercase tracking-widest"
+                >
+                  Youth
+                </div>
+              </div>
+              <h3
+                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
+              >
+                Annual Youth Conference 2024
+              </h3>
+              <p class="text-secondary leading-relaxed mb-6">
+                Join our vibrant youth community for a weekend of reflection,
+                music, and deep spiritual growth starting next month.
+              </p>
+              <span
+                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
+                >May 15, 2024</span
+              >
+            </div>
+            <div class="group">
+              <div class="relative mb-8 overflow-hidden rounded-lg">
+                <img
+                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="Volunteers preparing food for community outreach"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqI0k8T3-ZXfxdqof341UYFVdIRGDzWb2sAwzWs2GILMWx_vZtjJvAKKpheCCAre3dYsJD4mn5BqdtIyUsUwkpJWl_6o78pZ9k5yP1txqownQYhZ29mrdvD-ibqSZjzUj0KPbkrh3wmZROuun-bhRGDKTJ8tuqBkw6_kcUqbyJmKUKjlaQ6JEaFLm2fI-s9qDB7AKMF_yNOwyr0Sc8emANgaGUej3esUjI6iXbTRE90E0rtZisNrMeI8MIO_wm0vGNb3l_bfFVGQ"
+                />
+                <div
+                  class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-4 py-1 text-xs font-bold uppercase tracking-widest"
+                >
+                  Service
+                </div>
+              </div>
+              <h3
+                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
+              >
+                St. Vincent de Paul Food Drive
+              </h3>
+              <p class="text-secondary leading-relaxed mb-6">
+                Our local chapter is collecting non-perishable goods this Sunday
+                to support families in the Kiserian area.
+              </p>
+              <span
+                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
+                >May 12, 2024</span
+              >
+            </div>
+            <div class="group md:col-span-2 lg:col-span-1">
+              <div class="relative mb-8 overflow-hidden rounded-lg">
+                <img
+                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-alt="Close up of a priest holding a golden monstrance"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcUxpDZ98j7DT4m7r6ZDEfxEct4gtoy3tdZ9MSLPNbNsEK9FjobVAibULReBhunfzPMj9grvJdIKmnVYw8pohyiVKFKjvt909sOxGlLJJ4fKT_Zh3DWCilOEZdjiALd6kBdDmAyR-qtJgUHCvxW0W3H1EpcquCpSm84uqNlUqIgrcOHw-1GzuJIXJOLg6BuMmVQEbEs21DblbROuEvQ2xZZPT3ZPBiQRSkin6Mabis-AZQUV-H3XnsLD7j7y_6nVAJVtuMzLlpqx11"
+                />
+                <div
+                  class="absolute top-4 left-4 bg-secondary text-on-secondary px-4 py-1 text-xs font-bold uppercase tracking-widest"
+                >
+                  Worship
+                </div>
+              </div>
+              <h3
+                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
+              >
+                Solemnity of Corpus Christi
+              </h3>
+              <p class="text-secondary leading-relaxed mb-6">
+                Prepare for our annual Eucharistic Procession through the
+                streets of Kiserian. A day of profound public witness.
+              </p>
+              <span
+                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
+                >May 10, 2024</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="py-32 bg-surface-container-highest relative overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-pattern-arch pointer-events-none opacity-40"
+        ></div>
+        <div class="max-w-7xl mx-auto px-8 text-center relative z-10">
+          <div class="max-w-3xl mx-auto">
+            <span class="material-symbols-outlined text-tertiary text-5xl mb-8"
+              >volunteer_activism</span
+            >
+            <h2
+              class="font-headline text-5xl font-extrabold text-on-surface mb-8"
+            >
+              Support Our Parish
+            </h2>
+            <p class="font-body text-xl text-secondary mb-12 leading-relaxed">
+              Your stewardship allows us to maintain our sacred spaces and
+              continue our vital outreach programs in the community. Every
+              contribution is a seed of faith.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+              <button
+                class="bg-tertiary text-on-tertiary px-12 py-5 rounded-sm font-label uppercase text-sm tracking-[0.2em] font-bold shadow-xl hover:translate-y-[-2px] transition-all"
+              >
+                Donate Online
+              </button>
+              <button
+                class="bg-white text-primary border border-outline-variant/30 px-12 py-5 rounded-sm font-label uppercase text-sm tracking-[0.2em] font-bold hover:bg-surface-container transition-all"
+              >
+                Pledge Monthly
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer
+      class="bg-slate-50 dark:bg-slate-950 w-full border-t border-slate-200 dark:border-slate-800"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto px-8 py-16"
+      >
+        <div class="space-y-6">
+          <div class="text-lg font-semibold text-sky-800 dark:text-sky-200">
+            St. Mary's Catholic Church Kiserian
+          </div>
+          <p
+            class="font-noto-serif text-base text-slate-700 dark:text-slate-300"
+          >
+            A community of faith serving the Kiserian region with devotion and
+            love since its founding.
+          </p>
+          <div class="flex gap-4">
+            <span class="material-symbols-outlined text-amber-700"
+              >social_leaderboard</span
+            >
+            <span class="material-symbols-outlined text-amber-700">share</span>
+            <span class="material-symbols-outlined text-amber-700">mail</span>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <h4
+            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100"
+          >
+            Quick Links
+          </h4>
+          <ul class="space-y-4">
+            <li>
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                href="#"
+                >Mass Times</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                href="#"
+                >Confession</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                href="#"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                href="#"
+                >Privacy Policy</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="space-y-6">
+          <h4
+            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100"
+          >
+            Our Location
+          </h4>
+          <div
+            class="h-48 rounded-lg overflow-hidden grayscale border border-slate-200"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Simple street map view of Kiserian neighborhood"
+              data-location="Kiserian, Kenya"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBExvuipXjqOJnWPnnphGM-r0S4U_CSMGnoVl_qK9bxNLN-tUmUq6pebkY6i_6JpsCkEQjsZEnqMaSlt7Bw__dUSf1m38UW_iG2oQBSdMqCz7tLpnvNqueRfqn6MM6f-HMccQA7t2S0woBVs5dY4wlYhBrnRiAs0Gv640VcixEWSenqcXChRPa6cQPooU6ILnwxK0taIQOvC9-kiWNZKA2VNLtaUKu4jxwr6oIo9ODpXgFm1E-RjLkFUBoq3SB5l90Rtsc4RuoYJu6i"
+            />
+          </div>
+          <p class="text-sm text-slate-500">
+            Main Magadi Road, Kiserian, Kenya
+          </p>
+        </div>
+      </div>
+      <div
+        class="max-w-7xl mx-auto px-8 py-8 border-t border-slate-100 dark:border-slate-900 text-center"
+      >
+        <p class="font-noto-serif text-sm text-slate-500 dark:text-slate-400">
+          © 2024 St. Mary's Catholic Church Kiserian. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
