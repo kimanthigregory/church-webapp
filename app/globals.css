@@ -1,0 +1,105 @@
+/* 1. External Imports must be FIRST */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;800&family=Manrope:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap");
+
+/* 2. Tailwind Import SECOND */
+@import "tailwindcss";
+
+/* 3. Theme Config THIRD */
+@theme {
+  --color-surface-variant: #e2e2e2;
+  --color-surface-tint: #075fab;
+  --color-on-error-container: #93000a;
+  --color-secondary-fixed: #e3e2e2;
+  --color-background: #f9f9f9;
+  --color-on-primary-fixed-variant: #004884;
+  --color-secondary-container: #e0dfdf;
+  --color-surface-container-low: #f3f3f3;
+  --color-on-surface-variant: #3f484c;
+  --color-outline: #6f787d;
+  --color-primary: #075fab;
+  --color-primary-fixed: #d4e3ff;
+  --color-secondary-fixed-dim: #c7c6c6;
+  --color-tertiary-fixed-dim: #e9c176;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #626363;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary: #775a19;
+  --color-tertiary-fixed: #ffdea5;
+  --color-tertiary-container: #e6bf75;
+  --color-error-container: #ffdad6;
+  --color-on-secondary-fixed: #1a1c1c;
+  --color-on-primary: #ffffff;
+  --color-primary-fixed-dim: #a4c9ff;
+  --color-surface-container-highest: #e2e2e2;
+  --color-on-tertiary-fixed-variant: #5d4201;
+  --color-on-tertiary-fixed: #261900;
+  --color-on-tertiary-container: #694c0b;
+  --color-error: #ba1a1a;
+  --color-primary-container: #a0c6ff;
+  --color-on-primary-fixed: #001c39;
+  --color-on-background: #1a1c1c;
+  --color-surface: #f9f9f9;
+  --color-surface-container-high: #e8e8e8;
+  --color-on-surface: #1a1c1c;
+  --color-inverse-on-surface: #f1f1f1;
+  --color-secondary: #5e5e5f;
+  --color-on-primary-container: #005296;
+  --color-outline-variant: #bfc8cd;
+  --color-on-error: #ffffff;
+  --color-surface-dim: #dadada;
+  --color-on-secondary-fixed-variant: #464747;
+  --color-inverse-primary: #a4c9ff;
+  --color-surface-container: #eeeeee;
+  --color-inverse-surface: #2f3131;
+  --color-surface-bright: #f9f9f9;
+  --color-on-tertiary: #ffffff;
+
+  --font-headline: "Noto Serif", serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+}
+
+/* 4. Base styles and custom classes LAST */
+@layer base {
+  body {
+    @apply bg-surface font-body text-on-surface antialiased;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 300,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.glass-reflection {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40px);
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #075fab 0%, #a0c6ff 100%);
+}
+
+.bg-pattern-cross {
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='130' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 10v60M15 30h30' stroke='%23075fab' stroke-width='1.5' fill='none' stroke-opacity='0.15'/%3E%3C/svg%3E");
+  background-size: 80px 130px;
+}
+
+.bg-pattern-arch {
+  background-image: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 110 Q 10 20 60 20 Q 110 20 110 110' stroke='%23775a19' stroke-width='1' fill='none' stroke-opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.bg-pattern-stained-glass {
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 L40 0 L80 40 L40 80 Z M40 0 L40 80 M0 40 L80 40' stroke='%23000' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}

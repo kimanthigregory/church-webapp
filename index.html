@@ -83,6 +83,20 @@
               xl: "0.5rem",
               full: "0.75rem",
             },
+            animation: {
+              "fade-slow": "fade-in 2s ease-in-out forwards",
+              "zoom-slow": "zoom-in 12s ease-in-out forwards",
+            },
+            keyframes: {
+              "fade-in": {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              "zoom-in": {
+                "0%": { transform: "scale(1)" },
+                "100%": { transform: "scale(1.08)" },
+              },
+            },
           },
         },
       };
@@ -114,13 +128,64 @@
         background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 L40 0 L80 40 L40 80 Z M40 0 L40 80 M0 40 L80 40' stroke='%23000' stroke-width='1' fill='none' stroke-opacity='0.08'/%3E%3C/svg%3E");
         background-size: 120px 120px;
       }
+
+      /* Slideshow logic */
+      .slideshow-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 2s ease-in-out;
+      }
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+      .slide.active img {
+        animation: zoom-in 12s ease-in-out forwards;
+      }
+
+      /* Nav hover animation */
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #775a19; /* tertiary */
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .nav-link-active::after {
+        width: 100%;
+      }
+
+      /* Mobile Menu */
+      #mobile-menu {
+        transition: transform 0.3s ease-in-out;
+        transform: translateY(-100%);
+      }
+      #mobile-menu.active {
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body
     class="bg-surface font-body text-on-surface antialiased bg-pattern-stained-glass"
   >
     <nav
-      class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none transition-all duration-300 ease-in-out"
+      class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md transition-all duration-300"
+      id="main-nav"
     >
       <div
         class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4"
@@ -130,67 +195,132 @@
         >
           St. Mary's Kiserian
         </div>
-        <div class="hidden md:flex items-center gap-8">
+        <!-- Desktop Nav -->
+        <div class="hidden lg:flex items-center gap-6 xl:gap-8">
           <a
-            class="font-noto-serif text-sm uppercase tracking-widest text-sky-700 dark:text-sky-400 border-b-2 border-amber-600 pb-1"
+            class="nav-link nav-link-active font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-sky-900 font-bold"
             href="#"
             >Home</a
           >
           <a
-            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
             href="#"
-            >About Us</a
+            >Mass Times</a
           >
           <a
-            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
-            href="#"
-            >Daily Readings</a
-          >
-          <a
-            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
             href="#"
             >Ministries</a
           >
           <a
-            class="font-noto-serif text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-800 dark:hover:text-sky-200 transition-colors"
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
             href="#"
-            >Gallery</a
+            >Daily Readings</a
+          >
+          <a
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
+            href="#"
+            >Announcements</a
+          >
+          <a
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
+            href="#"
+            >About</a
+          >
+          <a
+            class="nav-link font-noto-serif text-[10px] xl:text-xs uppercase tracking-[0.15em] text-slate-600 hover:text-sky-800 transition-colors"
+            href="#"
+            >Contact</a
           >
         </div>
-        <button
-          class="bg-tertiary text-on-tertiary px-6 py-2 rounded-sm font-label uppercase text-xs tracking-widest font-bold hover:bg-tertiary-container transition-colors duration-300"
-        >
-          Donate
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-tertiary text-on-tertiary px-5 py-2 rounded-sm font-label uppercase text-[10px] tracking-widest font-bold hover:bg-tertiary-container transition-colors duration-300"
+          >
+            Donate
+          </button>
+          <button
+            class="lg:hidden text-slate-800 focus:outline-none"
+            id="menu-toggle"
+          >
+            <span class="material-symbols-outlined text-3xl">menu</span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Nav Menu -->
+      <div
+        class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center gap-8 lg:hidden"
+        id="mobile-menu"
+      >
+        <button class="absolute top-6 right-8 text-slate-800" id="menu-close">
+          <span class="material-symbols-outlined text-4xl">close</span>
         </button>
+        <a class="font-headline text-2xl font-bold text-primary" href="#"
+          >Home</a
+        >
+        <a class="font-headline text-2xl text-slate-600" href="#">Mass Times</a>
+        <a class="font-headline text-2xl text-slate-600" href="#">Ministries</a>
+        <a class="font-headline text-2xl text-slate-600" href="#"
+          >Daily Readings</a
+        >
+        <a class="font-headline text-2xl text-slate-600" href="#"
+          >Announcements</a
+        >
+        <a class="font-headline text-2xl text-slate-600" href="#">About</a>
+        <a class="font-headline text-2xl text-slate-600" href="#">Contact</a>
       </div>
     </nav>
     <main>
+      <!-- Hero Section with Slideshow -->
       <section
         class="relative min-h-screen flex items-center pt-20 overflow-hidden"
       >
-        <div class="absolute inset-0 z-0">
-          <img
-            class="w-full h-full object-cover"
-            data-alt="Peaceful interior of a historic stone church altar area"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQCj5UhXdBrOb4vATX9w448IZ_H1dq9xOE-EpbR0nalflolNKVOqgUT8r3nmbaUDoDMLbWU1xpEOaBD6zRlgaBjvMBR99NX-1NbjZz_7wI0CmZiA6-98ZPSfZ7_GWKlT9rJeQZQ3htC5cJfl5kX9X-x20gVON-fnt1fcZgmIXR8eCJhPG6Wm2hQfCIriQXaBd70lzOkdSm4YEKRAsP-oIyZ3ALB9KaAESiWSZuk007oKhwA3sjD0MbGQYR0h0D4ErO7_HirtiPHjs"
-          />
+        <div class="absolute inset-0 z-0 slideshow-container">
+          <div class="slide active">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Church interior altar"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQCj5UhXdBrOb4vATX9w448IZ_H1dq9xOE-EpbR0nalflolNKVOqgUT8r3nmbaUDoDMLbWU1xpEOaBD6zRlgaBjvMBR99NX-1NbjZz_7wI0CmZiA6-98ZPSfZ7_GWKlT9rJeQZQ3htC5cJfl5kX9X-x20gVON-fnt1fcZgmIXR8eCJhPG6Wm2hQfCIriQXaBd70lzOkdSm4YEKRAsP-oIyZ3ALB9KaAESiWSZuk007oKhwA3sjD0MbGQYR0h0D4ErO7_HirtiPHjs"
+            />
+          </div>
+          <div class="slide">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Church exterior architecture"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn-p3v6uA9I9-S7mXh-0z-x_V3DkQ3i4S_0o27a6Z4f98m9qQ-E_1v8O9V9-6Z-p-k-p-h-v-m-u-m-e-z-g-l-l-y-y"
+            />
+          </div>
+          <div class="slide">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Parishioners in prayer"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDD4Z-m-o-g-h-v-m-p-l-l-y-y-z-g-e-x-t-e-r-i-o-r-j"
+            />
+          </div>
+          <div class="slide">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="Church choir singing"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ1wb62x4wndCIufvjmmUuRpTM6WI5RpcCFIlWXrhOy5pBEn8Rq9DTvzuaqXNHmrAlh7KF0DG8vWA2RRHd8QiITxV7Q3IPyerudGcmSTeBooeRA95PbzetL-xnOmCw-ji25RcaGkRTZF-Osxmgd4Uw3TnhguNI6n65B-UTHy92XmTdd_etQ9D1JNGrVqhuulsIMOe4YkeHhELgHA-0vP68eD_hCVQQcZPKKZAznBQ5xz-ZIoKNNTfC7wXkfd7kPIEs-aKrbv_DrYxe"
+            />
+          </div>
           <div
-            class="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent"
+            class="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent z-10"
           ></div>
           <div
-            class="absolute inset-0 opacity-40 pointer-events-none bg-pattern-arch mix-blend-multiply"
+            class="absolute inset-0 opacity-30 pointer-events-none bg-pattern-arch mix-blend-multiply z-10"
           ></div>
         </div>
         <div
-          class="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12"
+          class="relative z-20 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12"
         >
-          <div class="lg:col-span-7">
+          <div class="lg:col-span-8 xl:col-span-7">
             <span
-              class="inline-block mb-6 font-label text-tertiary uppercase tracking-[0.2em] text-sm font-bold"
+              class="inline-block mb-6 font-label text-tertiary uppercase tracking-[0.25em] text-sm font-bold"
               >A Digital Sanctuary</span
             >
             <h1
-              class="font-headline text-6xl md:text-7xl lg:text-8xl text-primary font-extrabold leading-[1.1] mb-8 -tracking-[0.02em]"
+              class="font-headline text-6xl md:text-7xl lg:text-8xl text-primary font-extrabold leading-[1.05] mb-8 -tracking-[0.03em]"
             >
               Welcome to Our <br />Parish Family
             </h1>
@@ -202,12 +332,12 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-6">
               <button
-                class="bg-tertiary text-on-tertiary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold hero-gradient border-none shadow-lg"
+                class="bg-tertiary text-on-tertiary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold hero-gradient border-none shadow-xl hover:-translate-y-1 transition-all"
               >
                 Mass Times
               </button>
               <button
-                class="bg-transparent text-primary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold border border-outline-variant/20 hover:bg-surface-container transition-colors"
+                class="bg-white/80 backdrop-blur text-primary px-10 py-5 rounded-sm font-label uppercase text-sm tracking-widest font-bold border border-outline-variant/30 hover:bg-white transition-all shadow-sm"
               >
                 Explore Ministries
               </button>
@@ -215,9 +345,10 @@
           </div>
         </div>
       </section>
+      <!-- Liturgical Schedule -->
       <section class="py-24 bg-surface-container-low relative overflow-hidden">
         <div
-          class="absolute inset-0 bg-pattern-cross pointer-events-none opacity-60"
+          class="absolute inset-0 bg-pattern-cross pointer-events-none opacity-40"
         ></div>
         <div class="max-w-7xl mx-auto px-8 relative z-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -226,10 +357,10 @@
                 Liturgical Schedule
               </h2>
               <div class="h-1 w-20 bg-tertiary mb-12"></div>
-              <div class="space-y-8">
-                <div class="flex gap-6 items-start">
+              <div class="space-y-10">
+                <div class="flex gap-8 items-start">
                   <div
-                    class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border-l-4 border-primary"
+                    class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border-l-4 border-primary mt-1"
                   >
                     <span
                       class="material-symbols-outlined text-primary text-3xl"
@@ -237,28 +368,51 @@
                     >
                   </div>
                   <div>
-                    <h3 class="font-headline text-xl font-bold mb-2">
+                    <h3 class="font-headline text-2xl font-bold mb-4">
                       Mass Times
                     </h3>
-                    <div class="space-y-2 text-secondary">
-                      <p class="flex justify-between w-64">
-                        <span>Monday - Friday:</span>
-                        <span class="font-semibold">6:30 AM</span>
-                      </p>
-                      <p class="flex justify-between w-64">
-                        <span>Saturday:</span>
-                        <span class="font-semibold">5:00 PM (Vigil)</span>
-                      </p>
-                      <p class="flex justify-between w-64">
-                        <span>Sunday:</span>
-                        <span class="font-semibold">8:00 AM, 10:30 AM</span>
-                      </p>
+                    <div class="space-y-4 text-secondary">
+                      <div>
+                        <p
+                          class="text-xs uppercase tracking-widest font-bold text-primary mb-2"
+                        >
+                          Sundays
+                        </p>
+                        <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                          <span
+                            class="bg-primary/5 border border-primary/10 rounded-md py-2 text-center text-primary font-extrabold"
+                            >7:00 AM</span
+                          >
+                          <span
+                            class="bg-primary/5 border border-primary/10 rounded-md py-2 text-center text-primary font-extrabold"
+                            >8:30 AM</span
+                          >
+                          <span
+                            class="bg-primary/5 border border-primary/10 rounded-md py-2 text-center text-primary font-extrabold"
+                            >10:00 AM</span
+                          >
+                          <span
+                            class="bg-primary/5 border border-primary/10 rounded-md py-2 text-center text-primary font-extrabold"
+                            >12:00 PM</span
+                          >
+                          <span
+                            class="bg-primary/5 border border-primary/10 rounded-md py-2 text-center text-primary font-extrabold"
+                            >5:00 PM</span
+                          >
+                        </div>
+                      </div>
+                      <div class="pt-2">
+                        <p class="flex justify-between max-w-sm">
+                          <span class="font-medium">Monday - Friday:</span>
+                          <span class="font-bold text-on-surface">6:30 AM</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="flex gap-6 items-start">
+                <div class="flex gap-8 items-start">
                   <div
-                    class="bg-surface-container-lowest p-4 rounded-lg shadow-sm border-l-4 border-tertiary"
+                    class="bg-surface-container-lowest p-5 rounded-lg shadow-sm border-l-4 border-tertiary mt-1"
                   >
                     <span
                       class="material-symbols-outlined text-tertiary text-3xl"
@@ -266,17 +420,15 @@
                     >
                   </div>
                   <div>
-                    <h3 class="font-headline text-xl font-bold mb-2">
+                    <h3 class="font-headline text-2xl font-bold mb-4">
                       Sacrament of Confession
                     </h3>
                     <div class="space-y-2 text-secondary">
-                      <p class="flex justify-between w-64">
-                        <span>Saturday:</span>
-                        <span class="font-semibold">4:00 PM - 4:45 PM</span>
-                      </p>
-                      <p class="flex justify-between w-64">
-                        <span>First Fridays:</span>
-                        <span class="font-semibold">After Morning Mass</span>
+                      <p class="flex justify-between max-w-sm">
+                        <span class="font-medium">Saturday:</span>
+                        <span class="font-bold text-on-surface"
+                          >4:00 PM - 5:00 PM</span
+                        >
                       </p>
                     </div>
                   </div>
@@ -285,10 +437,10 @@
             </div>
             <div class="relative pt-12">
               <div
-                class="absolute -top-6 -left-6 w-32 h-32 bg-tertiary/20 rounded-full z-0"
+                class="absolute -top-6 -left-6 w-32 h-32 bg-tertiary/10 rounded-full z-0"
               ></div>
               <div
-                class="relative z-10 glass-reflection p-12 rounded-xl shadow-xl border border-outline-variant/10"
+                class="relative z-10 glass-reflection p-12 rounded-xl shadow-xl border border-white"
               >
                 <span class="material-symbols-outlined text-tertiary mb-4"
                   >format_quote</span
@@ -305,11 +457,11 @@
                 >
               </div>
               <div
-                class="mt-12 bg-surface-container-lowest p-1 shadow-sm rounded-lg overflow-hidden"
+                class="mt-12 bg-surface-container-lowest p-1 shadow-sm rounded-lg overflow-hidden border border-outline-variant/10"
               >
                 <img
-                  class="w-full h-48 object-cover rounded-md"
-                  data-alt="Close up of lit prayer candles in a dark cathedral"
+                  class="w-full h-56 object-cover rounded-md"
+                  data-alt="Close up of lit prayer candles"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwqynHO_DMKlSiUViY80Ggrh9hwQSmEzw12JaMyIbIUcPMZn3--s_9TYw0mLitdBdgIpjPSYgu5paQRsNG4Vz25qOGhcwKmxSQOBHdh_A3lNs1SrdiZLFsB5valTUIaSyAhbaMi8518B_UsuhSzQGmUBhnH5PWcQwD9uZY2ISHqpvX7z2zxDRXG40cUMvQQl4EAbIHCmdxOcoast0zBYlI0_XKCChHIgfx0KMc2grdMhk5VAJRFB_w-y7qZ5sWQmdSdNYueeD83wCU"
                 />
               </div>
@@ -317,13 +469,85 @@
           </div>
         </div>
       </section>
-      <section class="py-32 bg-surface relative overflow-hidden">
+      <!-- Daily Readings Snippet -->
+      <section class="py-20 bg-surface relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-8 relative z-10 text-center">
+          <div class="mb-10 flex flex-col items-center">
+            <span class="material-symbols-outlined text-tertiary text-4xl mb-4"
+              >menu_book</span
+            >
+            <h2 class="font-headline text-3xl font-bold text-on-surface mb-2">
+              Today's Readings
+            </h2>
+            <p
+              class="text-sm font-label uppercase tracking-widest text-secondary"
+            >
+              May 24, 2024 • Friday of the Seventh Week of Easter
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left mb-12">
+            <div class="space-y-3">
+              <h4
+                class="font-label text-xs uppercase tracking-widest font-extrabold text-primary"
+              >
+                First Reading
+              </h4>
+              <p class="text-secondary text-sm leading-relaxed italic">
+                "And they cast lots for them, and the lot fell on Matthias, and
+                he was enrolled with the eleven apostles..."
+              </p>
+              <p class="text-xs font-bold text-outline">Acts 1:15-17, 20-26</p>
+            </div>
+            <div
+              class="space-y-3 border-y md:border-y-0 md:border-x border-outline-variant/30 py-8 md:py-0 md:px-8"
+            >
+              <h4
+                class="font-label text-xs uppercase tracking-widest font-extrabold text-primary"
+              >
+                Psalm
+              </h4>
+              <p class="text-secondary text-sm leading-relaxed italic">
+                "Not to us, O Lord, but to your name give the glory, for your
+                mercy and your faithfulness."
+              </p>
+              <p class="text-xs font-bold text-outline">
+                Psalm 113:1-2, 3-4, 5-6, 7-8
+              </p>
+            </div>
+            <div class="space-y-3">
+              <h4
+                class="font-label text-xs uppercase tracking-widest font-extrabold text-primary"
+              >
+                Gospel
+              </h4>
+              <p class="text-secondary text-sm leading-relaxed italic">
+                "As the Father loves me, so I also love you. Remain in my love.
+                If you keep my commandments..."
+              </p>
+              <p class="text-xs font-bold text-outline">John 15:9-17</p>
+            </div>
+          </div>
+          <a
+            class="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-xs hover:gap-4 transition-all group"
+            href="#"
+          >
+            Read Full Readings
+            <span class="material-symbols-outlined text-base"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+      </section>
+      <!-- Announcements/News Editorial Style -->
+      <section
+        class="py-24 bg-surface-container-lowest relative overflow-hidden"
+      >
         <div
-          class="absolute inset-0 bg-pattern-stained-glass pointer-events-none opacity-70"
+          class="absolute inset-0 bg-pattern-stained-glass pointer-events-none opacity-30"
         ></div>
         <div class="max-w-7xl mx-auto px-8 relative z-10">
           <div
-            class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8"
+            class="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-4"
           >
             <div class="max-w-2xl">
               <span
@@ -333,109 +557,126 @@
               <h2
                 class="font-headline text-5xl font-extrabold text-on-surface leading-tight -tracking-tight"
               >
-                Recent News &amp; Spiritual Reflections
+                Announcements &amp; Reflections
               </h2>
             </div>
-            <button
-              class="text-primary font-label uppercase tracking-widest text-sm font-bold flex items-center gap-2 group"
+            <a
+              class="text-primary font-label uppercase tracking-widest text-sm font-bold flex items-center gap-2 border-b-2 border-primary/20 hover:border-primary transition-all pb-1"
+              href="#"
             >
-              View All News
-              <span
-                class="material-symbols-outlined transition-transform group-hover:translate-x-2"
-                >arrow_right_alt</span
-              >
-            </button>
+              Archive
+            </a>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="group">
-              <div class="relative mb-8 overflow-hidden rounded-lg">
+          <div class="space-y-20">
+            <!-- Featured Article -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div class="lg:col-span-7 overflow-hidden rounded-xl">
                 <img
-                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                  data-alt="Children in a parish youth choir rehearsal"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ1wb62x4wndCIufvjmmUuRpTM6WI5RpcCFIlWXrhOy5pBEn8Rq9DTvzuaqXNHmrAlh7KF0DG8vWA2RRHd8QiITxV7Q3IPyerudGcmSTeBooeRA95PbzetL-xnOmCw-ji25RcaGkRTZF-Osxmgd4Uw3TnhguNI6n65B-UTHy92XmTdd_etQ9D1JNGrVqhuulsIMOe4YkeHhELgHA-0vP68eD_hCVQQcZPKKZAznBQ5xz-ZIoKNNTfC7wXkfd7kPIEs-aKrbv_DrYxe"
-                />
-                <div
-                  class="absolute top-4 left-4 bg-primary text-on-primary px-4 py-1 text-xs font-bold uppercase tracking-widest"
-                >
-                  Youth
-                </div>
-              </div>
-              <h3
-                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
-              >
-                Annual Youth Conference 2024
-              </h3>
-              <p class="text-secondary leading-relaxed mb-6">
-                Join our vibrant youth community for a weekend of reflection,
-                music, and deep spiritual growth starting next month.
-              </p>
-              <span
-                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
-                >May 15, 2024</span
-              >
-            </div>
-            <div class="group">
-              <div class="relative mb-8 overflow-hidden rounded-lg">
-                <img
-                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                  data-alt="Volunteers preparing food for community outreach"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqI0k8T3-ZXfxdqof341UYFVdIRGDzWb2sAwzWs2GILMWx_vZtjJvAKKpheCCAre3dYsJD4mn5BqdtIyUsUwkpJWl_6o78pZ9k5yP1txqownQYhZ29mrdvD-ibqSZjzUj0KPbkrh3wmZROuun-bhRGDKTJ8tuqBkw6_kcUqbyJmKUKjlaQ6JEaFLm2fI-s9qDB7AKMF_yNOwyr0Sc8emANgaGUej3esUjI6iXbTRE90E0rtZisNrMeI8MIO_wm0vGNb3l_bfFVGQ"
-                />
-                <div
-                  class="absolute top-4 left-4 bg-tertiary text-on-tertiary px-4 py-1 text-xs font-bold uppercase tracking-widest"
-                >
-                  Service
-                </div>
-              </div>
-              <h3
-                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
-              >
-                St. Vincent de Paul Food Drive
-              </h3>
-              <p class="text-secondary leading-relaxed mb-6">
-                Our local chapter is collecting non-perishable goods this Sunday
-                to support families in the Kiserian area.
-              </p>
-              <span
-                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
-                >May 12, 2024</span
-              >
-            </div>
-            <div class="group md:col-span-2 lg:col-span-1">
-              <div class="relative mb-8 overflow-hidden rounded-lg">
-                <img
-                  class="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-105"
-                  data-alt="Close up of a priest holding a golden monstrance"
+                  class="w-full h-[400px] object-cover transition-transform duration-1000 hover:scale-105"
+                  data-alt="Priest with monstrance"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcUxpDZ98j7DT4m7r6ZDEfxEct4gtoy3tdZ9MSLPNbNsEK9FjobVAibULReBhunfzPMj9grvJdIKmnVYw8pohyiVKFKjvt909sOxGlLJJ4fKT_Zh3DWCilOEZdjiALd6kBdDmAyR-qtJgUHCvxW0W3H1EpcquCpSm84uqNlUqIgrcOHw-1GzuJIXJOLg6BuMmVQEbEs21DblbROuEvQ2xZZPT3ZPBiQRSkin6Mabis-AZQUV-H3XnsLD7j7y_6nVAJVtuMzLlpqx11"
                 />
-                <div
-                  class="absolute top-4 left-4 bg-secondary text-on-secondary px-4 py-1 text-xs font-bold uppercase tracking-widest"
+              </div>
+              <div class="lg:col-span-5 space-y-6">
+                <div class="flex items-center gap-4">
+                  <span
+                    class="bg-secondary/10 text-secondary px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full"
+                    >Worship</span
+                  >
+                  <span
+                    class="text-xs font-label uppercase text-outline font-semibold"
+                    >May 10, 2024</span
+                  >
+                </div>
+                <h3
+                  class="font-headline text-3xl font-bold text-on-surface hover:text-primary transition-colors cursor-pointer"
                 >
-                  Worship
+                  The Solemnity of Corpus Christi: A Public Witness of Love
+                </h3>
+                <p class="text-secondary text-lg leading-relaxed">
+                  Prepare for our annual Eucharistic Procession through the
+                  streets of Kiserian. This ancient tradition serves as a
+                  profound public witness of our faith in the Real Presence of
+                  Christ. Join the community in song and prayer as we follow the
+                  King of Kings.
+                </p>
+                <button
+                  class="text-primary font-bold uppercase tracking-widest text-xs flex items-center gap-2 group"
+                >
+                  Read More
+                  <span
+                    class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+                    >north_east</span
+                  >
+                </button>
+              </div>
+            </div>
+            <!-- Secondary Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+              <div class="group">
+                <div
+                  class="relative mb-6 overflow-hidden rounded-lg aspect-video"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    data-alt="Youth choir"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ1wb62x4wndCIufvjmmUuRpTM6WI5RpcCFIlWXrhOy5pBEn8Rq9DTvzuaqXNHmrAlh7KF0DG8vWA2RRHd8QiITxV7Q3IPyerudGcmSTeBooeRA95PbzetL-xnOmCw-ji25RcaGkRTZF-Osxmgd4Uw3TnhguNI6n65B-UTHy92XmTdd_etQ9D1JNGrVqhuulsIMOe4YkeHhELgHA-0vP68eD_hCVQQcZPKKZAznBQ5xz-ZIoKNNTfC7wXkfd7kPIEs-aKrbv_DrYxe"
+                  />
+                </div>
+                <div class="space-y-4">
+                  <span
+                    class="text-xs font-label uppercase tracking-widest text-primary font-extrabold"
+                    >Youth • May 15, 2024</span
+                  >
+                  <h4
+                    class="font-headline text-2xl font-bold group-hover:text-primary transition-colors"
+                  >
+                    Annual Youth Conference 2024: "Arise"
+                  </h4>
+                  <p class="text-secondary leading-relaxed">
+                    A weekend of reflection, music, and deep spiritual growth
+                    for teens and young adults in our parish. Registration is
+                    now open at the parish office.
+                  </p>
                 </div>
               </div>
-              <h3
-                class="font-headline text-2xl font-bold mb-4 group-hover:text-primary transition-colors"
-              >
-                Solemnity of Corpus Christi
-              </h3>
-              <p class="text-secondary leading-relaxed mb-6">
-                Prepare for our annual Eucharistic Procession through the
-                streets of Kiserian. A day of profound public witness.
-              </p>
-              <span
-                class="text-xs font-label uppercase tracking-[0.1em] text-outline font-semibold"
-                >May 10, 2024</span
-              >
+              <div class="group mt-12 md:mt-0">
+                <div
+                  class="relative mb-6 overflow-hidden rounded-lg aspect-video"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    data-alt="Community outreach"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqI0k8T3-ZXfxdqof341UYFVdIRGDzWb2sAwzWs2GILMWx_vZtjJvAKKpheCCAre3dYsJD4mn5BqdtIyUsUwkpJWl_6o78pZ9k5yP1txqownQYhZ29mrdvD-ibqSZjzUj0KPbkrh3wmZROuun-bhRGDKTJ8tuqBkw6_kcUqbyJmKUKjlaQ6JEaFLm2fI-s9qDB7AKMF_yNOwyr0Sc8emANgaGUej3esUjI6iXbTRE90E0rtZisNrMeI8MIO_wm0vGNb3l_bfFVGQ"
+                  />
+                </div>
+                <div class="space-y-4">
+                  <span
+                    class="text-xs font-label uppercase tracking-widest text-primary font-extrabold"
+                    >Service • May 12, 2024</span
+                  >
+                  <h4
+                    class="font-headline text-2xl font-bold group-hover:text-primary transition-colors"
+                  >
+                    St. Vincent de Paul Food Drive Results
+                  </h4>
+                  <p class="text-secondary leading-relaxed">
+                    Thank you to everyone who contributed to last week's
+                    collection. We successfully provided basic non-perishable
+                    goods to over 150 families in the Kiserian area.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+      <!-- Stewardship Section -->
       <section
         class="py-32 bg-surface-container-highest relative overflow-hidden"
       >
         <div
-          class="absolute inset-0 bg-pattern-arch pointer-events-none opacity-40"
+          class="absolute inset-0 bg-pattern-arch pointer-events-none opacity-25"
         ></div>
         <div class="max-w-7xl mx-auto px-8 text-center relative z-10">
           <div class="max-w-3xl mx-auto">
@@ -485,53 +726,60 @@
             love since its founding.
           </p>
           <div class="flex gap-4">
-            <span class="material-symbols-outlined text-amber-700"
+            <span
+              class="material-symbols-outlined text-amber-700 cursor-pointer hover:text-amber-900 transition-colors"
               >social_leaderboard</span
             >
-            <span class="material-symbols-outlined text-amber-700">share</span>
-            <span class="material-symbols-outlined text-amber-700">mail</span>
+            <span
+              class="material-symbols-outlined text-amber-700 cursor-pointer hover:text-amber-900 transition-colors"
+              >share</span
+            >
+            <span
+              class="material-symbols-outlined text-amber-700 cursor-pointer hover:text-amber-900 transition-colors"
+              >mail</span
+            >
           </div>
         </div>
         <div class="space-y-6">
           <h4
-            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100"
+            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100 border-b border-slate-200 pb-2 inline-block"
           >
             Quick Links
           </h4>
           <ul class="space-y-4">
             <li>
               <a
-                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 transition-all text-sm"
                 href="#"
                 >Mass Times</a
               >
             </li>
             <li>
               <a
-                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 transition-all text-sm"
                 href="#"
-                >Confession</a
+                >Ministries</a
               >
             </li>
             <li>
               <a
-                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 transition-all text-sm"
+                href="#"
+                >Daily Readings</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 transition-all text-sm"
                 href="#"
                 >Contact Us</a
-              >
-            </li>
-            <li>
-              <a
-                class="text-slate-500 dark:text-slate-400 hover:text-sky-700 hover:underline decoration-amber-500 underline-offset-4 transition-all"
-                href="#"
-                >Privacy Policy</a
               >
             </li>
           </ul>
         </div>
         <div class="space-y-6">
           <h4
-            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100"
+            class="font-bold uppercase tracking-widest text-xs text-slate-900 dark:text-slate-100 border-b border-slate-200 pb-2 inline-block"
           >
             Our Location
           </h4>
@@ -540,7 +788,7 @@
           >
             <img
               class="w-full h-full object-cover"
-              data-alt="Simple street map view of Kiserian neighborhood"
+              data-alt="Map of Kiserian"
               data-location="Kiserian, Kenya"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBExvuipXjqOJnWPnnphGM-r0S4U_CSMGnoVl_qK9bxNLN-tUmUq6pebkY6i_6JpsCkEQjsZEnqMaSlt7Bw__dUSf1m38UW_iG2oQBSdMqCz7tLpnvNqueRfqn6MM6f-HMccQA7t2S0woBVs5dY4wlYhBrnRiAs0Gv640VcixEWSenqcXChRPa6cQPooU6ILnwxK0taIQOvC9-kiWNZKA2VNLtaUKu4jxwr6oIo9ODpXgFm1E-RjLkFUBoq3SB5l90Rtsc4RuoYJu6i"
             />
@@ -558,5 +806,46 @@
         </p>
       </div>
     </footer>
+    <script>
+      // Hero Slideshow Logic
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+      const slideInterval = 6000;
+
+      function nextSlide() {
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+      }
+
+      setInterval(nextSlide, slideInterval);
+
+      // Mobile Menu Logic
+      const menuToggle = document.getElementById("menu-toggle");
+      const menuClose = document.getElementById("menu-close");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+
+      menuClose.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        document.body.style.overflow = "";
+      });
+
+      // Sticky Navbar Scroll Effect
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("main-nav");
+        if (window.scrollY > 50) {
+          nav.classList.add("bg-white/95", "shadow-md");
+          nav.classList.remove("bg-white/70");
+        } else {
+          nav.classList.add("bg-white/70");
+          nav.classList.remove("bg-white/95", "shadow-md");
+        }
+      });
+    </script>
   </body>
 </html>
